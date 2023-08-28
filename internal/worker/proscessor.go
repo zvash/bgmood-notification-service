@@ -15,4 +15,5 @@ type QueueProcessor interface {
 	Start() error
 	Run() error
 	ProcessTaskSendVerifyEmail(ctx context.Context, task *asynq.Task) error
+	ProcessTaskSendResetPasswordEmail(ctx context.Context, task *asynq.Task) error
 }

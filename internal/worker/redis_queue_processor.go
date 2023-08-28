@@ -40,14 +40,19 @@ func NewRedisQueueProcessor(redisOptions asynq.RedisClientOpt, emailSender mail.
 	}
 }
 
-func (processor *RedisQueueProcessor) Start() error {
+func (processor *RedisQueueProcessor) createMux() *asynq.ServeMux {
 	mux := asynq.NewServeMux()
 	mux.HandleFunc(TaskSendVerifyEmail, processor.ProcessTaskSendVerifyEmail)
+	mux.HandleFunc(TaskSendResetPasswordEmail, processor.ProcessTaskSendResetPasswordEmail)
+	return mux
+}
+
+func (processor *RedisQueueProcessor) Start() error {
+	mux := processor.createMux()
 	return processor.server.Start(mux)
 }
 
 func (processor *RedisQueueProcessor) Run() error {
-	mux := asynq.NewServeMux()
-	mux.HandleFunc(TaskSendVerifyEmail, processor.ProcessTaskSendVerifyEmail)
+	mux := processor.createMux()
 	return processor.server.Run(mux)
 }

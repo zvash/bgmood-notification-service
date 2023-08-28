@@ -40,7 +40,8 @@ func NewGeneralEmailSender(config util.Config) EmailSender {
 		disabled: config.MailDisableSend,
 	}
 	sender.templateToSubject = map[string]string{
-		"verify": fmt.Sprintf("%s - Verify Your Email Address", config.AppName),
+		"verify":         fmt.Sprintf("%s - Verify Your Email Address", config.AppName),
+		"reset-password": fmt.Sprintf("%s - Here is Your Password Reset Code", config.AppName),
 	}
 	return sender
 }
