@@ -51,7 +51,7 @@ func (sender *GeneralEmailSender) SendEmail(templateName string, variables inter
 		log.Printf("Sending %s email to %v is disabled", templateName, to)
 		return nil
 	}
-	path := fmt.Sprintf("internal/mail/template/%s.html", templateName)
+	path := fmt.Sprintf("template/%s.html", templateName)
 	t, err := template.ParseFiles(path)
 	if err != nil {
 		return err
