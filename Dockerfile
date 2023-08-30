@@ -14,6 +14,5 @@ COPY start.sh .
 COPY wait-for.sh .
 COPY template ./template
 
-EXPOSE 8080
 CMD [ "/app/main" ]
 ENTRYPOINT [ "/app/start.sh" ]
